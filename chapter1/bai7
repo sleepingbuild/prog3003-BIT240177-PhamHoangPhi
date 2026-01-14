@@ -1,1 +1,20 @@
+import java.util.TreeSet;
+
+public class Bai7 {
+    public static void main(String[] args){
+        TreeSet<String> name = new TreeSet<>();
+        name.add("John");
+        name.add("Alice");
+        name.add("Zack");
+        name.add("Bob");
+        System.out.println("Danh sach ten: " + name);
+
+        System.out.println("Danh sach ten duoc in theo thu tu tu dien.");
+        String firstElement = name.first();
+        String lastElement = name.last();
+        System.out.println("Phan tu dau tien: " + firstElement);
+        System.out.println("Phan tu cuoi cung: " + lastElement);
+
+    }
+}
 
