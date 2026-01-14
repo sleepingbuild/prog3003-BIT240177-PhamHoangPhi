@@ -1,1 +1,24 @@
+import java.util.HashSet;
+
+public class Bai6 {
+    public static void main(String[] args){
+        int[] numbers = {5, 2, 9, 2, 5, 8, 1};
+        HashSet<Integer> uniqueNumbers = new HashSet<>();
+        for (int num : numbers) {
+            uniqueNumbers.add(num);
+        }
+        System.out.println("Cac so duy nhat trong mang: " + uniqueNumbers);
+/*
+- hashset sử dụng cơ chế băm (hashing) để lưu trữ các phần tử, 
+giúp loại bỏ các phần tử trùng lặp một cách hiệu quả , không đảm bảo thứ tự chèn vào
+- sử dụng hash function để chuyển đổi giá trị của phần tử thành một mã băm (hash code) 
+và sử dụng mã băm này để xác định vị trí lưu trữ phần tử trong bộ nhớ.
+- Khi thêm một phần tử mới, hashset sẽ kiểm tra xem mã băm của phần tử đó đã tồn tại trong tập hợp hay chưa. 
+Nếu đã tồn tại, phần tử sẽ không được thêm vào, giúp đảm bảo tính duy nhất của các phần tử trong hashset.
+- vì vậy nên khi in ra các số duy nhất trong mảng, 
+thứ tự các số có thể khác với thứ tự ban đầu trong mảng do hashset không duy trì thứ tự chèn vào. 
+ 
+ */       
+    }
+}
 
