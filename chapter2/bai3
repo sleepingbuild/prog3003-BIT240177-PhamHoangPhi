@@ -1,0 +1,113 @@
+class TV {
+    public void turnOn(){
+        System.out.println("TV: Bat TV");
+    }
+    public void setInput(String input){
+        System.out.println("TV: chuyen che do: " + input);
+    }
+    public void turnOff() {
+        System.out.println("TV: Tat TV");
+    }
+}
+
+class SoundSystem{
+    public void turnOn(){
+        System.out.println("Loa: bat loa");
+    }
+    public void setVolume(int level){
+        System.out.println("Loa: dieu chinh am thanh ve muc: " + level);
+    }
+    public void turnOff(){
+        System.out.println("Loa: tat loa");
+    }
+}
+
+class DVDPlayer{
+    public void turnOn(){
+        System.out.println("DVD: bat dau DVD");
+    }
+    public void play(String movie){
+        System.out.println("DVD: bat phim: " + movie );
+    }
+    public void turnOff() {
+        System.out.println("DVD: tat dau DVD");
+    }
+    public void stop(){
+        System.out.println("DVD: DVD dung chieu");
+    }
+}
+
+class Light{
+    public void dim(int level){
+        System.out.println("Den: giam anh sang ve muc: " + level + "%");
+    }
+    public void brighten(){
+        System.out.println("Den: tang anh sang den muc 100%");
+    }
+}
+
+class HomeTheaterFacade{
+    private TV tv;
+    private SoundSystem soundSystem;
+    private DVDPlayer dvdPlayer;
+    private Light light;
+
+    public HomeTheaterFacade(TV tv,SoundSystem soundSystem , DVDPlayer dvdPlayer){
+        this.tv = tv;
+        this.soundSystem = soundSystem;
+        this.dvdPlayer = dvdPlayer;
+        this.light = new Light();
+    }
+
+    public HomeTheaterFacade(TV tv,SoundSystem soundSystem, DVDPlayer dvdPlayer, Light light){
+        this.tv = tv;
+        this.soundSystem=soundSystem;
+        this.dvdPlayer=dvdPlayer;
+        this.light=light;
+    }
+    public void watchMovie(String movieName){
+        System.out.println("=== Phim chuan bi chieu ===");
+        light.dim(20);
+
+        tv.turnOn();
+        tv.setInput("DVD");
+
+        soundSystem.turnOn();
+        soundSystem.setVolume(50);
+
+        dvdPlayer.turnOn();
+        dvdPlayer.play(movieName);
+
+        System.out.println("=== Phim chieu ===");
+    }
+    public void endMovie(){
+        System.out.println("=== Phim ket thuc ===");
+
+        dvdPlayer.stop();
+        dvdPlayer.turnOff();
+
+        soundSystem.setVolume(0);
+        soundSystem.turnOff();
+
+        tv.turnOff();
+
+        light.brighten();
+
+        System.out.println("=== Tat ca thiet bi da tat ===");
+    }
+}
+
+
+
+public class bai3 {
+    public static void main(String[] args){
+        TV tv = new TV();
+        SoundSystem soundSystem = new SoundSystem();
+        DVDPlayer dvdPlayer = new DVDPlayer();
+
+        HomeTheaterFacade homeTheater = new HomeTheaterFacade(tv,soundSystem,dvdPlayer);
+        homeTheater.watchMovie("Titanic");
+        System.out.println("\n--- Ket thuc phim ---\n");
+        homeTheater.endMovie();
+    }
+}
