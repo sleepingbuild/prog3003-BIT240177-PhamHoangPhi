@@ -1,0 +1,31 @@
+class DemSoThread extends Thread{
+    private String ten;
+
+    public DemSoThread(String ten){
+        this.ten = ten;
+    }
+    @Override
+    public void run(){
+        System.out.println(ten + " bat dau dem");
+        for(int i = 1 ; i <= 10 ; i++){
+            System.out.println(ten + ":" + i);
+            try{
+                Thread.sleep(500);
+            } catch(InterruptedException e){
+                System.out.println("Loi!");
+            }
+        }
+        System.out.println("Done!");
+    }
+}
+
+
+public class Bai2 {
+    public static void main(String[] args){
+        System.out.println("==== Thread dem so ====");
+
+            DemSoThread thread = new DemSoThread("Thread");
+            thread.start();
+
+    }
+}
