@@ -1,1 +1,40 @@
+class WorkerThread extends Thread{
+    @Override
+    public void run(){
+        for(int i = 1 ; i <= 3 ; i++){
+            System.out.println("Thread dang chay ....");
+            try{
+                Thread.sleep(500);
+            }catch(Exception e){
+                System.out.println("Loi!");
+            }
+        } System.out.println("Done!");
+    }
+}
 
+class WorkerRunnable implements Runnable{
+    @Override
+    public void run(){
+        for(int i = 1; i <= 3 ; i++){
+            System.out.println("Runnable dang chay.....");
+            try{
+                Thread.sleep(500);
+            }catch(Exception e){
+                System.out.println("Loi!");
+            }
+        }System.out.println("Done!");
+    }
+}
+public class Bai1{
+    public static void main(String[] args){
+        System.out.println("=== Thread dang khoi dong ===");
+        WorkerThread t1 = new WorkerThread();
+        t1.run();
+
+        System.out.println("=== Runnable dang khoi dong ===");
+        WorkerRunnable t2 = new WorkerRunnable();
+        t2.run();
+
+
+    }
+}
