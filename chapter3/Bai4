@@ -1,0 +1,38 @@
+import java.util.concurrent.CompletableFuture;
+
+public class Bai4 {
+    public static void main(String[] args) throws  Exception{
+        System.out.println("Xu ly don hang #00100001\n");
+
+        CompletableFuture<Void> task1 = CompletableFuture.runAsync(()->{
+           String result = "Dang kiem tra kho....";
+           sleep(1000);
+           result += "Con hang";
+           System.out.println(result);
+
+        });
+        CompletableFuture<Void> task2 = CompletableFuture.runAsync(()->{
+           String result = "Dang xu ly thanh toan....";
+           sleep(2000);
+           result += "Thanh toan thanh cong!";
+           System.out.println(result);
+        });
+        CompletableFuture<Void> task3 = CompletableFuture.runAsync(()->{
+            String result = "Dang chuan bi van chuyen....";
+            sleep(2500);
+            result += "Da dong goi xong!";
+            System.out.println(result);
+        });
+        CompletableFuture<Void> allTask = CompletableFuture.allOf(task1,task2,task3);
+        allTask.thenRun(()->{
+            System.out.println("Don hang da duoc xu ly hoan tat!");
+        });
+
+        Thread.sleep(3000);
+    }
+    static void sleep(int ms){
+        try{
+            Thread.sleep(ms);
+        }catch(Exception e){};
+    }
+}
