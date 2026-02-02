@@ -1,0 +1,35 @@
+import java.util.*;
+import java.util.stream.*;
+import java.util.concurrent.*;
+
+
+public class Bai3 {
+    public static void main(String[] args){
+        CompletableFuture<int[]> buoc1 = CompletableFuture.supplyAsync(()->{
+            int[] arr = {5,2,3,9,11,20,40,55,50,68};
+            System.out.println("Mang goc: " + Arrays.toString(arr));
+            return arr;
+        });
+
+        CompletableFuture<List<Integer>> buoc2 = buoc1.thenApply(arr -> {
+            List<Integer> result = new ArrayList<>();
+            for(int num : arr) {
+                if (num % 2 == 1) {
+                    result.add(num);
+                }
+            }
+            Collections.sort(result);
+            System.out.println("So le da sap xep: " + result);
+            return result;
+        });
+        CompletableFuture<String> buoc3 = buoc2.thenApply(list ->{
+            String str = "Ket qua la: " + list;
+            System.out.println("Chuoi ket qua: " + str);
+            return str;
+        });
+        buoc3.thenAccept(finalResult -> {
+            System.out.println("Ket qua cuoi: ");
+            System.out.println(finalResult);
+        });
+    }
+}
