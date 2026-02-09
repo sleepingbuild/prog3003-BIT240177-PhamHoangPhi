@@ -1,0 +1,15 @@
+import java.util.*;
+import java.util.function.Function;
+
+public class Bai4 {
+    public static void main(String[] args){
+        List<String> curr = Arrays.asList("$10","$20","$50");
+
+        Function<String,Integer> converter = s -> Integer.parseInt(s.substring(1));
+        List<Integer> nums = new ArrayList<>();
+        for(String cur:curr){
+            nums.add(converter.apply(cur));
+        }
+        System.out.println(nums);
+    }
+}
