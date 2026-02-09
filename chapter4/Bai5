@@ -1,0 +1,13 @@
+import java.util.function.Supplier;
+import java.util.function.Consumer;
+
+public class Bai5 {
+    public static void main(String[] args){
+        Supplier<Double> randomNumberSupplier = () -> Math.random() * 100;
+
+        Consumer<Double> printNumberConsumer = number ->
+                System.out.printf("So may man: %.2f%n ",number);
+        Double randomNumber = randomNumberSupplier.get();
+        printNumberConsumer.accept(randomNumber);
+    }
+}
