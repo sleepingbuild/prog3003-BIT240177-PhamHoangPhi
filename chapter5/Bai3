@@ -1,0 +1,46 @@
+package org.example;
+import jakarta.persistence.*;
+@Entity
+@Table(name = "products")
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    private int id;
+    private String name;
+    private double price;
+    public Product(){}
+    public Product(String name, double price){
+        this.name = name;
+        this.price = price;
+    }
+    public int getId(){return id;}
+
+    public String getName(){return name;}
+    public void setName(String name){this.name=name;}
+
+    public double getPrice(){return price;}
+    public void setPrice(double price){this.price=price;}
+
+}
+
+
+//=======MAIN======//
+package org.example;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class Bai3 {
+    public static void main(String[] args){
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        session.beginTransaction();
+        Product p = new Product("Laptop",1500);
+        session.save(p);
+        session.getTransaction().commit();
+        session.close();
+        factory.close();
+
+        System.out.println("Da luu san pham thanh cong");
+    }
+}
