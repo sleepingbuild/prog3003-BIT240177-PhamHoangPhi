@@ -1,0 +1,23 @@
+package org.example;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import java.util.List;
+
+public class Bai4 {
+    public static void main(String[] args){
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        session.beginTransaction();
+
+        String hql = "FROM Product p WHERE p.price > 1000";
+        List<Product> products = session.createQuery(hql,Product.class).getResultList();
+        for(Product p: products){
+            System.out.println(p.getId() + " - " + p.getName() + " - " + p.getPrice());
+        }
+        session.getTransaction().commit();
+        session.close();
+        factory.close();
+    }
+}
