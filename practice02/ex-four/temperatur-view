@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.TemperatureController">
+
+    <Label text="Chuyển đổi nhiệt độ C → F"/>
+
+    <TextField fx:id="celsiusField"
+               promptText="Nhập nhiệt độ Celsius"/>
+
+    <Button text="Convert"
+            onAction="#handleConvert"/>
+
+    <Label fx:id="resultLabel"
+           text="Kết quả sẽ hiển thị ở đây"/>
+
+</VBox>
