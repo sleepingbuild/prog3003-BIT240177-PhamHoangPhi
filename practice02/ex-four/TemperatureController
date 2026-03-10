@@ -1,0 +1,31 @@
+package org.example.controller;
+
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+public class TemperatureController {
+
+    @FXML
+    private TextField celsiusField;
+
+    @FXML
+    private Label resultLabel;
+
+    @FXML
+    private void handleConvert() {
+
+        try {
+            double c = Double.parseDouble(celsiusField.getText());
+
+            // Công thức chuyển đổi
+            double f = c * 9 / 5 + 32;
+
+            resultLabel.setText("Nhiệt độ F: " + f);
+
+        } catch (Exception e) {
+            resultLabel.setText("Vui lòng nhập số hợp lệ");
+        }
+    }
+}
