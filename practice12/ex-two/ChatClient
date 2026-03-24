@@ -1,0 +1,76 @@
+package org.example;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+
+import java.net.URI;
+
+public class ChatClient extends Application {
+
+    private TextArea chatArea;
+    private TextField inputField;
+    private WebSocketClient client;
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        chatArea = new TextArea();
+        chatArea.setEditable(false);
+
+        inputField = new TextField();
+        Button sendBtn = new Button("Send");
+
+        sendBtn.setOnAction(e -> sendMessage());
+
+        HBox bottom = new HBox(inputField, sendBtn);
+        VBox root = new VBox(chatArea, bottom);
+
+        connectWebSocket();
+
+        stage.setScene(new Scene(root, 400, 300));
+        stage.setTitle("Chat Client");
+        stage.show();
+    }
+
+    private void connectWebSocket() throws Exception {
+        client = new WebSocketClient(new URI("ws://localhost:8887")) {
+
+            @Override
+            public void onOpen(ServerHandshake handshakedata) {
+                chatArea.appendText("Connected to server\n");
+            }
+
+            @Override
+            public void onMessage(String message) {
+                chatArea.appendText(message + "\n");
+            }
+
+            @Override
+            public void onClose(int code, String reason, boolean remote) {
+                chatArea.appendText("Disconnected\n");
+            }
+
+            @Override
+            public void onError(Exception ex) {
+                ex.printStackTrace();
+            }
+        };
+
+        client.connect();
+    }
+
+    private void sendMessage() {
+        String msg = inputField.getText();
+        client.send(msg);
+        inputField.clear();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
